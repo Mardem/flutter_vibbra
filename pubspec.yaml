@@ -40,6 +40,13 @@ dependencies:
   get_it: ^7.2.0
   dio: ^4.0.4
 
+  # Responsive
+  flutter_screenutil: ^5.1.1
+  flutter_svg: ^1.0.3
+
+  # Fonts
+  google_fonts: ^2.1.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -63,9 +70,11 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - src/
+    - src/img/
+    - src/img/bgs/
+    - src/img/home/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -77,7 +86,7 @@ flutter:
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
-  # example:
+  # login:
   # fonts:
   #   - family: Schyler
   #     fonts:
