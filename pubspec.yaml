@@ -35,6 +35,11 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
 
+  # Architecture Dependencies
+  rxdart: ^0.27.3
+  get_it: ^7.2.0
+  dio: ^4.0.4
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
