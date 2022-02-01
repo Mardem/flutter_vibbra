@@ -4,16 +4,51 @@ import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:vibbra_notifications/core/di/inject.dart';
 import 'package:vibbra_notifications/design_system/components/ui/app_button.dart';
+import 'package:vibbra_notifications/design_system/utils/snackbar.util.dart';
 import 'package:vibbra_notifications/design_system/values/colors.dart';
 
 import 'components/shape_bottom.dart';
 import 'components/shape_top.dart';
 import 'login.viewmodel.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
 
-  final _vm = inject<LoginViewModel>();
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final vm = inject<LoginViewModel>();
+
+  @override
+  void didChangeDependencies() {
+    vm.error.listen((event) {
+      SnackBarUtil.show(
+        context,
+        message: event,
+        snackBarColor: SnackBarColors.error,
+      );
+    });
+
+    vm.success.listen((event) {
+      SnackBarUtil.show(
+        context,
+        message: event,
+        snackBarColor: SnackBarColors.success,
+      );
+    });
+
+    vm.info.listen((event) {
+      SnackBarUtil.show(
+        context,
+        message: event,
+        snackBarColor: SnackBarColors.defaultColor,
+      );
+    });
+
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -111,7 +146,7 @@ class LoginPage extends StatelessWidget {
                                 SignInButton(
                                   Buttons.Google,
                                   text: 'Login com o Google',
-                                  onPressed: () => _vm.googleLogin(),
+                                  onPressed: () => vm.googleLogin(),
                                 ),
                               ],
                             ),

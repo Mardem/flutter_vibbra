@@ -7,4 +7,8 @@ abstract class DefaultColors {
   static const Color defaultPurple = Color.fromRGBO(65, 83, 141, 1.0);
 
   static const Color accentBlue = Color.fromRGBO(213, 236, 251, 1.0);
+
+  static const Color snackBarInfoColor = Colors.blueAccent;
+  static const Color snackBarSuccessColor = Colors.green;
+  static const Color snackBarErrorColor = Colors.redAccent;
 }
