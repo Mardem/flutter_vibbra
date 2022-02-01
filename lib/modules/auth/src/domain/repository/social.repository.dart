@@ -14,7 +14,6 @@ class SocialRepository implements SocialLoginInteractor {
         );
       }
 
-      SocialInfo socialInfo = SocialInfo();
       SocialInfo info = await _provider!.login();
 
       return info;
