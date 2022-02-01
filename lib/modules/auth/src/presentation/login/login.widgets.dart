@@ -17,31 +17,70 @@ class LoginWidgets {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextFormField(
-              decoration: LoginWidgets.inputDecoration(
-                hint: 'E-mail',
-              ),
+            StreamBuilder<String>(
+              stream: vm.email,
+              builder: (context, snapshot) {
+                return TextFormField(
+                  decoration: LoginWidgets.inputDecoration(
+                    hint: 'E-mail',
+                  ),
+                  initialValue: snapshot.data,
+                  onChanged: (String value) => vm.setEmail(value),
+                );
+              },
             ),
             SizedBox(height: 30.w),
-            TextFormField(
-              decoration: inputDecoration(
-                hint: 'Senha',
-              ),
+            StreamBuilder<String>(
+              stream: vm.password,
+              builder: (context, snapshot) {
+                return TextFormField(
+                  obscureText: true,
+                  decoration: inputDecoration(
+                    hint: 'Senha',
+                  ),
+                  initialValue: snapshot.data,
+                  onChanged: (String value) => vm.setPassword(value),
+                );
+              },
             ),
             SizedBox(height: 20.w),
-            AppButton(
-              child: const Text(
-                'Acessar',
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-              padding: EdgeInsets.symmetric(
-                horizontal: 30.w,
-              ),
-              backgroundColor: DefaultColors.defaultBlue,
-              elevation: 0,
-              onPressed: () => print(''),
+            StreamBuilder<bool>(
+              stream: vm.loading,
+              initialData: false,
+              builder: (context, AsyncSnapshot<bool> snapshot) {
+                if (snapshot.hasData && snapshot.data == true) {
+                  return AppButton(
+                    child: const SizedBox(
+                      width: 15,
+                      height: 15,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        color: Colors.white,
+                      ),
+                    ),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 30.w,
+                    ),
+                    backgroundColor: DefaultColors.defaultBlue,
+                    elevation: 0,
+                  );
+                }
+
+                return AppButton(
+                  child: const Text(
+                    'Acessar',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 30.w,
+                  ),
+                  backgroundColor: DefaultColors.defaultBlue,
+                  elevation: 0,
+                  onPressed: () async => vm.login(),
+                );
+              },
             )
           ],
         ),
