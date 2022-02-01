@@ -14,6 +14,15 @@ class App extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         initialRoute: routeLogin.name,
         onGenerateRoute: RouteGenerator.generateRoute,
+        builder: (context, widget) {
+          //add this line
+          ScreenUtil.setContext(context);
+          return MediaQuery(
+            //Setting font does not change with system font size
+            data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+            child: widget ?? Container(),
+          );
+        },
       ),
     );
   }

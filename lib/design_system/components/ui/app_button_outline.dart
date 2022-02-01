@@ -8,17 +8,18 @@ class AppButtonOutline extends StatelessWidget {
   final double? elevation;
 
   const AppButtonOutline({
+    Key? key,
     this.onPressed,
     this.child,
     this.padding,
     this.elevation,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
       child: Padding(
-        padding: padding ?? EdgeInsets.all(0),
+        padding: padding ?? const EdgeInsets.all(0),
         child: child,
       ),
       style: ButtonStyle(

@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "776938893956",
+    "project_id": "social-login-7a7e6",
+    "storage_bucket": "social-login-7a7e6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:776938893956:android:372ee39c93f6aa010848d1",
+        "android_client_info": {
+          "package_name": "br.com.vibbra.notifications.vibbra_notifications"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "776938893956-kpu5no6f9th9hnt9lddio6phb38aqkkq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZKFQEX_e2ygrMMZcOA_YZyaL-z6LCwZs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "776938893956-kpu5no6f9th9hnt9lddio6phb38aqkkq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "776938893956-6e2c0bgdfj22iv8534upkqksc1esqphc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "br.com.vibbra.notifications.vibbraNotifications"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

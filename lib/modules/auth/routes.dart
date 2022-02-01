@@ -4,7 +4,7 @@ import 'package:vibbra_notifications/modules/auth/src/presentation/login/login.p
 final routeLogin = AppRoute(
   name: '/login',
   direction: NavigationType.fromLeft,
-  page: const LoginPage(),
+  page: LoginPage(),
 );
 
 final List<AppRoute> routeAuthModule = [

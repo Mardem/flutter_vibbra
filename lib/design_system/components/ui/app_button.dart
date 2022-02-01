@@ -7,15 +7,17 @@ class AppButton extends StatelessWidget {
   final Widget? child;
   final EdgeInsets? padding;
   final double? elevation;
+  final double? radius;
   final dynamic backgroundColor;
 
   const AppButton({
+    Key? key,
     this.onPressed,
     this.child,
     this.padding,
     this.elevation,
-    this.backgroundColor,
-  });
+    this.backgroundColor, this.radius,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +37,7 @@ class AppButton extends StatelessWidget {
         ),
         shape: MaterialStateProperty.all(
           RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30.0),
+            borderRadius: BorderRadius.circular(radius ?? 30.0),
           ),
         ),
       ),
