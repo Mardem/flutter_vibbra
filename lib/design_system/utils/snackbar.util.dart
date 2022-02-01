@@ -14,7 +14,7 @@ class SnackBarUtil {
           ? null
           : SnackBarAction(
               label: actionMessage ?? "OK",
-              onPressed: () => action == null ? () => null : action(),
+              onPressed: () => action(),
               textColor: Colors.white54,
             ),
       content: Text(message ?? ''),

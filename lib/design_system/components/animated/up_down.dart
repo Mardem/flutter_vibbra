@@ -25,7 +25,7 @@ class _AppDownAnimationState extends State<AppDownAnimation>
     ),
   )..repeat(reverse: true);
 
-  late Animation<Offset> _animation = Tween(
+  late final Animation<Offset> _animation = Tween(
     begin: Offset.zero,
     end: Offset(0, widget.endPosition ?? 0.2),
   ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));

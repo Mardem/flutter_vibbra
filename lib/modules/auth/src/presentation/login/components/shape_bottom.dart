@@ -18,7 +18,7 @@ class ShapeBottomStack extends StatelessWidget {
       bottom: bottom ?? ScreenUtil().setWidth(-100),
       right: right ?? ScreenUtil().setWidth(-250),
       child: RotationTransition(
-        turns: new AlwaysStoppedAnimation(-20 / 560),
+        turns: const AlwaysStoppedAnimation(-20 / 560),
         child: SvgPicture.asset(
           'src/img/home/shape_bottom.svg',
           semanticsLabel: 'Shape Bottom',
