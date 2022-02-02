@@ -21,7 +21,10 @@ class AccountServiceLocalImpl implements AccountServiceLocal {
     HttpResponse response = HttpResponse();
 
     try {
-      _localStorage.set(AccountServiceLocalKeys.keepConnected, status);
+      _localStorage.set(
+        AccountServiceLocalKeys.keepConnected,
+        status.toString(),
+      );
 
       response
         ..isSuccess = true

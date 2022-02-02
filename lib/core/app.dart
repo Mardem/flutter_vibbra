@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vibbra_notifications/core/routes/routes.dart';
-import 'package:vibbra_notifications/modules/auth/routes.dart';
+import 'package:vibbra_notifications/modules/splash/routes.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
@@ -12,7 +12,7 @@ class App extends StatelessWidget {
       designSize: const Size(375, 812),
       builder: () => MaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: routeLogin.name,
+        initialRoute: routeSplash.name,
         onGenerateRoute: RouteGenerator.generateRoute,
         builder: (context, widget) {
           //add this line

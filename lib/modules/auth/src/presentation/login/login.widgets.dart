@@ -150,7 +150,7 @@ class LoginWidgets {
           SignInButton(
             Buttons.Google,
             text: 'Login com o Google',
-            onPressed: () => vm.googleLogin(),
+            onPressed: () => vm.googleLogin(context),
           ),
         ],
       ),
