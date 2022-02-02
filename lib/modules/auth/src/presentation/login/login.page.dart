@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:vibbra_notifications/design_system/utils/snackbar.util.dart';
 import 'package:vibbra_notifications/modules/auth/src/presentation/login/login.widgets.dart';
 
@@ -48,12 +48,12 @@ class _LoginPageState extends State<LoginPage> with LoginWidgets {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Container(
-          height: double.infinity,
-          color: const Color.fromRGBO(249, 249, 252, 1.0),
+        body: SingleChildScrollView(
           child: Stack(
             children: [
+              Container(height: ScreenUtil().screenHeight),
               const ShapeTopStack(),
+              const ShapeBottomStack(),
               Positioned(
                 width: ScreenUtil().screenWidth,
                 height: ScreenUtil().screenHeight,
@@ -78,7 +78,6 @@ class _LoginPageState extends State<LoginPage> with LoginWidgets {
                   ],
                 ),
               ),
-              const ShapeBottomStack(),
             ],
           ),
         ),

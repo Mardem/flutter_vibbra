@@ -29,7 +29,7 @@ class LoginWidgets {
                 );
               },
             ),
-            SizedBox(height: 30.w),
+            SizedBox(height: 20.w),
             StreamBuilder<String>(
               stream: vm.password,
               builder: (context, snapshot) {
