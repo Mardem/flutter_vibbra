@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:vibbra_notifications/core/di/components/remote/http_client.dart';
 import 'package:vibbra_notifications/core/di/components/remote/response.dart';
 import 'package:vibbra_notifications/core/di/inject.dart';
@@ -16,9 +15,10 @@ class SmsServiceImpl implements SmsService {
   Future<HttpResponse> save({required InsertSmsProviderMapper info}) async {
     HttpResponse response = HttpResponse();
     try {
-      Response res = await _client.post(
+      await _client.post(
         SmsUrls.saveProvider('123456'),
         body: info.toJson(),
+        useToken: true,
       );
 
       response
