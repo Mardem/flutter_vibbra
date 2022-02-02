@@ -214,28 +214,29 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                           SizedBox(height: 15.w),
                           StreamBuilder<bool>(
-                              stream: vm.loading,
-                              builder: (context, snapshot) {
-                                if (snapshot.hasData && snapshot.data == true) {
-                                  return const AppButtonLoading();
-                                }
+                            stream: vm.loading,
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData && snapshot.data == true) {
+                                return const AppButtonLoading();
+                              }
 
-                                return AppButton(
-                                  child: Text(
-                                    'Continuar',
-                                    style: GoogleFonts.openSans(
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.white,
-                                    ),
+                              return AppButton(
+                                child: Text(
+                                  'Continuar',
+                                  style: GoogleFonts.openSans(
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.white,
                                   ),
-                                  backgroundColor: DefaultColors.defaultBlue,
-                                  onPressed: () async {
-                                    if (_key.currentState!.validate()) {
-                                      await vm.register();
-                                    }
-                                  },
-                                );
-                              })
+                                ),
+                                backgroundColor: DefaultColors.defaultBlue,
+                                onPressed: () async {
+                                  if (_key.currentState!.validate()) {
+                                    await vm.register(context);
+                                  }
+                                },
+                              );
+                            },
+                          )
                         ],
                       ),
                     ),

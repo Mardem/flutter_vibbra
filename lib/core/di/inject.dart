@@ -2,6 +2,7 @@ import 'package:get_it/get_it.dart';
 import 'package:vibbra_notifications/core/di/components/local/local_storage.dart';
 import 'package:vibbra_notifications/firebase/di/module.di.dart';
 import 'package:vibbra_notifications/modules/auth/di/module.di.dart';
+import 'package:vibbra_notifications/modules/home/di/module.di.dart';
 
 import 'components/remote/http_client.dart';
 
@@ -14,4 +15,5 @@ Future<void> startModules() async {
   /// Firebase modules
   await startFirebaseModule();
   startAuthModule();
+  startHomeModules();
 }

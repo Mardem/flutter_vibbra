@@ -1,12 +1,16 @@
+import 'package:flutter/cupertino.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:vibbra_notifications/core/base/viewmodel.base.dart';
 import 'package:vibbra_notifications/core/di/components/remote/response.dart';
 import 'package:vibbra_notifications/core/di/inject.dart';
 import 'package:vibbra_notifications/modules/auth/src/data/remote/mappers/inser_register.mapper.dart';
 import 'package:vibbra_notifications/modules/auth/src/domain/interactor/account.interactor.dart';
+import 'package:vibbra_notifications/modules/home/routes.dart';
+import 'package:vibbra_notifications/modules/home/src/presentation/home/home.viewmodel.dart';
 
 class RegisterViewModel extends BaseViewModel {
   final _interactor = inject<AccountInteractor>();
+  final _homeVM = inject<HomeViewModel>();
 
   final _email = BehaviorSubject<String>.seeded('');
   Stream<String> get email => _email.stream;
@@ -32,7 +36,7 @@ class RegisterViewModel extends BaseViewModel {
   Stream<String> get address => _address.stream;
   void setAddress(String value) => _address.add(value);
 
-  register() async {
+  register(BuildContext context) async {
     setLoading(true);
 
     InsertRegisterMapper user = InsertRegisterMapper(
@@ -48,6 +52,10 @@ class RegisterViewModel extends BaseViewModel {
 
     if (res.isSuccess) {
       setSuccess(res.message);
+
+      _homeVM.setName('Marden Cavalcante');
+
+      Navigator.pushNamed(context, routeHome.name);
     } else {
       setError(res.message);
     }

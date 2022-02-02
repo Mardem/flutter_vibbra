@@ -57,6 +57,7 @@ dependencies:
   # UI Helpers
   flutter_signin_button: ^2.0.0
   easy_mask: ^2.0.1
+  line_icons: ^2.0.1
 
   # Test helper
   faker: ^2.0.0
