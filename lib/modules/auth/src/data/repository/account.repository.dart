@@ -1,5 +1,6 @@
 import 'package:vibbra_notifications/core/di/components/remote/response.dart';
 import 'package:vibbra_notifications/core/di/inject.dart';
+import 'package:vibbra_notifications/modules/auth/src/data/local/account_local.service.dart';
 import 'package:vibbra_notifications/modules/auth/src/data/remote/mappers/inser_register.mapper.dart';
 import 'package:vibbra_notifications/modules/auth/src/data/remote/mappers/login.mapper.dart';
 import 'package:vibbra_notifications/modules/auth/src/data/remote/services/account.service.dart';
@@ -7,6 +8,7 @@ import 'package:vibbra_notifications/modules/auth/src/domain/repository/account.
 
 class AccountRepositoryImpl implements AccountRepository {
   final _accountService = inject<AccountService>();
+  final _accountServiceLocal = inject<AccountServiceLocal>();
 
   @override
   Future<HttpResponse<LoginMapper?>> login({
@@ -19,5 +21,15 @@ class AccountRepositoryImpl implements AccountRepository {
   @override
   Future<HttpResponse> register({required InsertRegisterMapper user}) {
     return _accountService.register(user: user);
+  }
+
+  @override
+  HttpResponse keepConnected({required bool status}) {
+    return _accountServiceLocal.keepConnected(status: status);
+  }
+
+  @override
+  Future<HttpResponse<LoginMapper?>> getLocalUser() {
+    return _accountServiceLocal.getUserData();
   }
 }

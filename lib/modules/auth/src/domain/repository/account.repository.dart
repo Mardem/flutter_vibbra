@@ -9,4 +9,6 @@ abstract class AccountRepository {
   });
 
   Future<HttpResponse> register({required InsertRegisterMapper user});
+  HttpResponse keepConnected({required bool status});
+  Future<HttpResponse<LoginMapper?>> getLocalUser();
 }

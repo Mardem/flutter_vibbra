@@ -51,4 +51,9 @@ class LoginViewModel extends BaseViewModel {
 
     setLoading(false);
   }
+
+  keepConnected(bool? val) {
+    setLogged(val ?? false);
+    _accountInteractor.keepConnected(status: val ?? false);
+  }
 }

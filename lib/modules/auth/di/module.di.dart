@@ -1,4 +1,5 @@
 import 'package:vibbra_notifications/core/di/inject.dart';
+import 'package:vibbra_notifications/modules/auth/src/data/local/account_local.service.dart';
 import 'package:vibbra_notifications/modules/auth/src/data/remote/services/account.service.dart';
 import 'package:vibbra_notifications/modules/auth/src/data/remote/services/google.service.dart';
 import 'package:vibbra_notifications/modules/auth/src/data/repository/account.repository.dart';
@@ -25,4 +26,5 @@ Future<void> startAuthModule() async {
   // Services
   inject.registerFactory<GoogleAuthService>(() => GoogleAuthServiceImpl());
   inject.registerFactory<AccountService>(() => AccountServiceImpl());
+  inject.registerFactory<AccountServiceLocal>(() => AccountServiceLocalImpl());
 }

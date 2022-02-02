@@ -11,6 +11,8 @@ abstract class AccountInteractor {
   });
 
   Future<HttpResponse> register({required InsertRegisterMapper user});
+  HttpResponse keepConnected({required bool status});
+  Future<HttpResponse<LoginMapper?>> getLocalUser();
 }
 
 class AccountInteractorImpl implements AccountInteractor {
@@ -27,5 +29,15 @@ class AccountInteractorImpl implements AccountInteractor {
   @override
   Future<HttpResponse> register({required InsertRegisterMapper user}) {
     return _repository.register(user: user);
+  }
+
+  @override
+  HttpResponse keepConnected({required bool status}) {
+    return _repository.keepConnected(status: status);
+  }
+
+  @override
+  Future<HttpResponse<LoginMapper?>> getLocalUser() {
+    return _repository.getLocalUser();
   }
 }

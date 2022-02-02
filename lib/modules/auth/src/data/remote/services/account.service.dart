@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:vibbra_notifications/core/di/components/remote/http_client.dart';
 import 'package:vibbra_notifications/core/di/components/remote/response.dart';
 import 'package:vibbra_notifications/core/di/inject.dart';
+import 'package:vibbra_notifications/modules/auth/src/data/local/account_local.service.dart';
 import 'package:vibbra_notifications/modules/auth/src/data/remote/mappers/inser_register.mapper.dart';
 import 'package:vibbra_notifications/modules/auth/src/data/remote/mappers/login.mapper.dart';
 import 'package:vibbra_notifications/modules/auth/src/data/urls/urls.dart';
@@ -13,6 +14,7 @@ abstract class AccountService {
 
 class AccountServiceImpl implements AccountService {
   final _client = inject<HttpClient>();
+  final _localService = inject<AccountServiceLocal>();
 
   @override
   Future<HttpResponse<LoginMapper?>> login({
@@ -27,6 +29,8 @@ class AccountServiceImpl implements AccountService {
       });
 
       LoginMapper mapper = LoginMapper.fromJson(res.data);
+
+      _localService.storeUserData(userData: res.data);
 
       response
         ..isSuccess = true

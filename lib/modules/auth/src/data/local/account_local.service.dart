@@ -1,0 +1,102 @@
+import 'dart:convert';
+
+import 'package:vibbra_notifications/core/di/components/local/local_storage.dart';
+import 'package:vibbra_notifications/core/di/components/remote/response.dart';
+import 'package:vibbra_notifications/core/di/inject.dart';
+import 'package:vibbra_notifications/modules/auth/src/data/remote/mappers/login.mapper.dart';
+
+abstract class AccountServiceLocal {
+  HttpResponse keepConnected({required bool status});
+
+  HttpResponse storeUserData({required Map<String, dynamic> userData});
+
+  Future<HttpResponse<LoginMapper?>> getUserData();
+}
+
+class AccountServiceLocalImpl implements AccountServiceLocal {
+  final _localStorage = inject<LocalStorage>();
+
+  @override
+  HttpResponse keepConnected({required bool status}) {
+    HttpResponse response = HttpResponse();
+
+    try {
+      _localStorage.set(AccountServiceLocalKeys.keepConnected, status);
+
+      response
+        ..isSuccess = true
+        ..message = AccountServiceLocalMessage.success;
+    } catch (e) {
+      response
+        ..isSuccess = false
+        ..message = AccountServiceLocalMessage.error;
+    }
+
+    return response;
+  }
+
+  @override
+  HttpResponse storeUserData({required Map<String, dynamic> userData}) {
+    HttpResponse response = HttpResponse();
+
+    try {
+      _localStorage.set(
+        AccountServiceLocalKeys.userData,
+        jsonEncode(userData),
+      );
+
+      response
+        ..isSuccess = true
+        ..message = AccountServiceLocalMessage.success;
+    } catch (e) {
+      response
+        ..isSuccess = false
+        ..message = AccountServiceLocalMessage.error;
+    }
+
+    return response;
+  }
+
+  @override
+  Future<HttpResponse<LoginMapper?>> getUserData() async {
+    HttpResponse<LoginMapper> response = HttpResponse();
+
+    try {
+      String? encodedData = await _localStorage.get(
+        AccountServiceLocalKeys.userData,
+      );
+      Map<String, dynamic> data = jsonDecode(encodedData!);
+
+      if (data.isNotEmpty) {
+        LoginMapper mapper = LoginMapper.fromJson(data);
+
+        response
+          ..isSuccess = true
+          ..data = mapper
+          ..message = AccountServiceLocalMessage.successDecode
+          ..statusCode = HttpStatus.success;
+      } else {
+        throw Exception(AccountServiceLocalMessage.errorDecode);
+      }
+    } catch (e) {
+      response
+        ..isSuccess = false
+        ..message = e.toString();
+    }
+
+    return response;
+  }
+}
+
+class AccountServiceLocalKeys {
+  static String keepConnected = 'keep_connected';
+  static String userData = 'user_data';
+}
+
+class AccountServiceLocalMessage {
+  static String success = 'Manter logado, ativado.';
+  static String error = 'Não foi possível ativar essa função';
+
+  static String errorDecode = 'Houve um problema ao recuperar os dados locais.';
+  static String successDecode = 'Dados recuperados com sucesso!';
+}
