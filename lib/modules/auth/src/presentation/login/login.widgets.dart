@@ -4,6 +4,7 @@ import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:vibbra_notifications/core/di/inject.dart';
 import 'package:vibbra_notifications/design_system/components/ui/app_button.dart';
 import 'package:vibbra_notifications/design_system/values/colors.dart';
+import 'package:vibbra_notifications/modules/auth/routes.dart';
 
 import 'login.viewmodel.dart';
 
@@ -106,7 +107,7 @@ class LoginWidgets {
     );
   }
 
-  socialLogin() {
+  socialLogin(BuildContext context) {
     return Expanded(
       child: Column(
         children: [
@@ -129,14 +130,15 @@ class LoginWidgets {
               ],
             ),
           ),
-          const AppButton(
-            child: Text(
+          AppButton(
+            child: const Text(
               'Criar uma conta',
               style: TextStyle(color: Colors.white),
             ),
             backgroundColor: DefaultColors.defaultBlue,
             elevation: 0,
             radius: 3,
+            onPressed: () => Navigator.pushNamed(context, routeRegister.name),
           ),
           SignInButton(
             Buttons.Google,

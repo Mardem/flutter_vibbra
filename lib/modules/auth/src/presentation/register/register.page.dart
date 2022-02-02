@@ -2,19 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:vibbra_notifications/design_system/utils/snackbar.util.dart';
+import 'package:vibbra_notifications/modules/auth/src/presentation/login/components/shape_bottom.dart';
+import 'package:vibbra_notifications/modules/auth/src/presentation/login/components/shape_top.dart';
 import 'package:vibbra_notifications/modules/auth/src/presentation/login/login.widgets.dart';
 
-import 'components/shape_bottom.dart';
-import 'components/shape_top.dart';
-
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({Key? key}) : super(key: key);
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> with LoginWidgets {
+class _RegisterPageState extends State<RegisterPage> with LoginWidgets {
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
 
   @override
@@ -71,10 +70,7 @@ class _LoginPageState extends State<LoginPage> with LoginWidgets {
                     const Text('Acesse sua conta'),
                     Expanded(
                       child: Column(
-                        children: [
-                          apiLogin(_key),
-                          socialLogin(context),
-                        ],
+                        children: [],
                       ),
                     )
                   ],
