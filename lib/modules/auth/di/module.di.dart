@@ -7,6 +7,7 @@ import 'package:vibbra_notifications/modules/auth/src/domain/interactor/social.i
 import 'package:vibbra_notifications/modules/auth/src/domain/repository/account.repository.dart';
 import 'package:vibbra_notifications/modules/auth/src/domain/repository/social.repository.dart';
 import 'package:vibbra_notifications/modules/auth/src/presentation/login/login.viewmodel.dart';
+import 'package:vibbra_notifications/modules/auth/src/presentation/register/register.viewmodel.dart';
 
 Future<void> startAuthModule() async {
   // Interactors
@@ -19,6 +20,7 @@ Future<void> startAuthModule() async {
 
   // ViewModels
   inject.registerFactory<LoginViewModel>(() => LoginViewModel());
+  inject.registerFactory<RegisterViewModel>(() => RegisterViewModel());
 
   // Services
   inject.registerFactory<GoogleAuthService>(() => GoogleAuthServiceImpl());

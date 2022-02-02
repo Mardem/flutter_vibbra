@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:vibbra_notifications/core/di/inject.dart';
 import 'package:vibbra_notifications/design_system/components/ui/app_button.dart';
+import 'package:vibbra_notifications/design_system/components/ui/app_button_loading.dart';
 import 'package:vibbra_notifications/design_system/values/colors.dart';
 import 'package:vibbra_notifications/modules/auth/routes.dart';
 
@@ -57,27 +58,32 @@ class LoginWidgets {
                   );
                 },
               ),
+              SizedBox(height: 10.w),
+              SizedBox(
+                height: 30.w,
+                child: StreamBuilder<bool>(
+                  stream: vm.logged,
+                  builder: (context, snapshot) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        const Text('Manter logado?'),
+                        Checkbox(
+                          value: snapshot.data,
+                          onChanged: (bool? val) => vm.setLogged(val ?? false),
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ),
               SizedBox(height: 20.w),
               StreamBuilder<bool>(
                 stream: vm.loading,
                 initialData: false,
                 builder: (context, AsyncSnapshot<bool> snapshot) {
                   if (snapshot.hasData && snapshot.data == true) {
-                    return AppButton(
-                      child: const SizedBox(
-                        width: 15,
-                        height: 15,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2,
-                          color: Colors.white,
-                        ),
-                      ),
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 30.w,
-                      ),
-                      backgroundColor: DefaultColors.defaultBlue,
-                      elevation: 0,
-                    );
+                    return const AppButtonLoading();
                   }
 
                   return AppButton(

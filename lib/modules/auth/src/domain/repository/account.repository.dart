@@ -1,4 +1,5 @@
 import 'package:vibbra_notifications/core/di/components/remote/response.dart';
+import 'package:vibbra_notifications/modules/auth/src/data/remote/mappers/inser_register.mapper.dart';
 import 'package:vibbra_notifications/modules/auth/src/data/remote/mappers/login.mapper.dart';
 
 abstract class AccountRepository {
@@ -6,4 +7,6 @@ abstract class AccountRepository {
     required String email,
     required String password,
   });
+
+  Future<HttpResponse> register({required InsertRegisterMapper user});
 }

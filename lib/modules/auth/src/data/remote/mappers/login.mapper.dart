@@ -30,7 +30,7 @@ class User {
     required this.email,
   });
 
-  String id;
+  int id;
   String name;
   String email;
 
