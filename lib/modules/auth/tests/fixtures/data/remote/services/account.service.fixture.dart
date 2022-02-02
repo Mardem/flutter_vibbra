@@ -1,4 +1,5 @@
 import 'package:faker/faker.dart';
+import 'package:vibbra_notifications/modules/auth/src/data/remote/mappers/inser_register.mapper.dart';
 
 class AccountServiceFixture {
   static String email = 'marden@gmail.com';
@@ -15,5 +16,18 @@ class AccountServiceFixture {
         "email": faker.internet.safeEmail(),
       }
     };
+  }
+
+  static InsertRegisterMapper registerFake() {
+    InsertRegisterMapper mapper = InsertRegisterMapper(
+      name: faker.person.name(),
+      email: faker.internet.safeEmail(),
+      phoneNumber: faker.phoneNumber.us(),
+      password: faker.jwt.secret,
+      companyName: faker.company.name(),
+      companyAddress: faker.address.streetName(),
+    );
+
+    return mapper;
   }
 }
