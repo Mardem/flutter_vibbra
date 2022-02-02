@@ -9,10 +9,12 @@ import 'package:vibbra_notifications/modules/auth/src/data/remote/services/googl
 import 'package:vibbra_notifications/modules/auth/src/domain/interactor/account.interactor.dart';
 import 'package:vibbra_notifications/modules/auth/src/domain/interactor/social.interactor.dart';
 import 'package:vibbra_notifications/modules/home/routes.dart';
+import 'package:vibbra_notifications/modules/home/src/presentation/home/home.viewmodel.dart';
 
 class LoginViewModel extends BaseViewModel {
   final _socialInteractor = inject<SocialLoginInteractor>();
   final _accountInteractor = inject<AccountInteractor>();
+  final _homeVM = inject<HomeViewModel>();
 
   final _email = BehaviorSubject<String>.seeded('');
   Stream<String> get email => _email.stream;
@@ -47,6 +49,8 @@ class LoginViewModel extends BaseViewModel {
 
     if (res.isSuccess) {
       setSuccess('Bem vindo, ${res.data!.user!.name}!');
+
+      _homeVM.setName(res.data!.user!.name);
 
       Navigator.pushNamed(context, routeHome.name);
     } else {

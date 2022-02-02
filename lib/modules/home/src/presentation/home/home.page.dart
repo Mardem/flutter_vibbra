@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:vibbra_notifications/core/di/inject.dart';
 import 'package:vibbra_notifications/design_system/components/layouts/main.layout.dart';
 import 'package:vibbra_notifications/design_system/components/ui/app_text.dart';
 import 'package:vibbra_notifications/design_system/values/colors.dart';
+import 'package:vibbra_notifications/modules/auth/routes.dart';
+import 'package:vibbra_notifications/modules/home/src/presentation/home/home.viewmodel.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -13,6 +16,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final vm = inject<HomeViewModel>();
+
   @override
   Widget build(BuildContext context) {
     return MainLayout(
@@ -26,10 +31,15 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: 180.w),
-              AppText(
-                text: 'Bem vindo, Marden!',
-                fontWeight: FontWeight.bold,
-                fontSize: 20.sp,
+              StreamBuilder<String>(
+                stream: vm.name,
+                builder: (context, snapshot) {
+                  return AppText(
+                    text: 'Bem vindo, ${snapshot.data}!',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.sp,
+                  );
+                },
               ),
               Container(
                 margin: EdgeInsets.only(top: 30.w),
@@ -47,13 +57,23 @@ class _HomePageState extends State<HomePage> {
                       icon: LineIcons.envelope,
                       title: 'Configuração\nde\nE-mail',
                     ),
-                    _container(
-                      icon: LineIcons.home,
-                      title: 'Tela inicial',
+                    GestureDetector(
+                      child: _container(
+                        icon: LineIcons.home,
+                        title: 'Tela inicial',
+                      ),
+                      onTap: () {
+                        Navigator.pushNamed(context, routeLogin.name);
+                      },
                     ),
-                    _container(
-                      icon: LineIcons.timesCircleAlt,
-                      title: 'Sair',
+                    GestureDetector(
+                      child: _container(
+                        icon: LineIcons.timesCircleAlt,
+                        title: 'Sair',
+                      ),
+                      onTap: () {
+                        Navigator.pushNamed(context, routeLogin.name);
+                      },
                     ),
                   ],
                 ),
