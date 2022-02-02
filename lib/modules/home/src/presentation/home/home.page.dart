@@ -7,6 +7,7 @@ import 'package:vibbra_notifications/design_system/components/ui/app_text.dart';
 import 'package:vibbra_notifications/design_system/values/colors.dart';
 import 'package:vibbra_notifications/modules/auth/routes.dart';
 import 'package:vibbra_notifications/modules/home/src/presentation/home/home.viewmodel.dart';
+import 'package:vibbra_notifications/modules/sms/routes.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -49,9 +50,14 @@ class _HomePageState extends State<HomePage> {
                   crossAxisSpacing: 20,
                   mainAxisSpacing: 20,
                   children: [
-                    _container(
-                      icon: LineIcons.mobilePhone,
-                      title: 'Configuração\nde\nSMS',
+                    GestureDetector(
+                      child: _container(
+                        icon: LineIcons.mobilePhone,
+                        title: 'Configuração\nde\nSMS',
+                      ),
+                      onTap: () {
+                        Navigator.pushNamed(context, routeSmsConfig.name);
+                      },
                     ),
                     _container(
                       icon: LineIcons.envelope,
