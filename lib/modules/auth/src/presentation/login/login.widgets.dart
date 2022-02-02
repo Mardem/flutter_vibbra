@@ -58,6 +58,25 @@ class LoginWidgets {
                   );
                 },
               ),
+              SizedBox(height: 10.w),
+              SizedBox(
+                height: 30.w,
+                child: StreamBuilder<bool>(
+                  stream: vm.logged,
+                  builder: (context, snapshot) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        const Text('Manter logado?'),
+                        Checkbox(
+                          value: snapshot.data,
+                          onChanged: (bool? val) => vm.setLogged(val ?? false),
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ),
               SizedBox(height: 20.w),
               StreamBuilder<bool>(
                 stream: vm.loading,

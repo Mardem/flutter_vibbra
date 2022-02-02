@@ -44,8 +44,6 @@ class GoogleAuthServiceImpl implements GoogleAuthService {
     if (loginActive) {
       await googleAuthBridge.disconnect();
       await googleAuthBridge.signOut();
-
-      print(loggerKey + 'Usuário deslogado');
     }
   }
 

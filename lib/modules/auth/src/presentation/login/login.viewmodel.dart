@@ -20,6 +20,10 @@ class LoginViewModel extends BaseViewModel {
   Stream<String> get password => _password.stream;
   void setPassword(String value) => _password.add(value);
 
+  final _keepLogged = BehaviorSubject<bool>.seeded(false);
+  Stream<bool> get logged => _keepLogged.stream;
+  void setLogged(bool value) => _keepLogged.add(value);
+
   googleLogin() async {
     _socialInteractor.setProvider(
       inject<GoogleAuthService>(),
