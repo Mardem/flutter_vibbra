@@ -67,21 +67,17 @@ class AccountServiceLocalImpl implements AccountServiceLocal {
       );
       Map<String, dynamic> data = jsonDecode(encodedData!);
 
-      if (data.isNotEmpty) {
-        LoginMapper mapper = LoginMapper.fromJson(data);
+      LoginMapper mapper = LoginMapper.fromJson(data);
 
-        response
-          ..isSuccess = true
-          ..data = mapper
-          ..message = AccountServiceLocalMessage.successDecode
-          ..statusCode = HttpStatus.success;
-      } else {
-        throw Exception(AccountServiceLocalMessage.errorDecode);
-      }
+      response
+        ..isSuccess = true
+        ..data = mapper
+        ..message = AccountServiceLocalMessage.successDecode
+        ..statusCode = HttpStatus.success;
     } catch (e) {
       response
         ..isSuccess = false
-        ..message = e.toString();
+        ..message = AccountServiceLocalMessage.errorDecode;
     }
 
     return response;
