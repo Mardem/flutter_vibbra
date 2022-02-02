@@ -39,6 +39,7 @@ dependencies:
   rxdart: ^0.27.3
   get_it: ^7.2.0
   dio: ^4.0.4
+  shared_preferences: ^2.0.12
 
   # Firebase
   firebase_auth: ^3.3.6

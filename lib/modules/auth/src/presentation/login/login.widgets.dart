@@ -63,6 +63,7 @@ class LoginWidgets {
                 height: 30.w,
                 child: StreamBuilder<bool>(
                   stream: vm.logged,
+                  initialData: false,
                   builder: (context, snapshot) {
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -70,7 +71,7 @@ class LoginWidgets {
                         const Text('Manter logado?'),
                         Checkbox(
                           value: snapshot.data,
-                          onChanged: (bool? val) => vm.setLogged(val ?? false),
+                          onChanged: (bool? val) => vm.keepConnected(val),
                         ),
                       ],
                     );
