@@ -10,7 +10,7 @@ class AccountServiceFixture {
     return {
       "token": faker.jwt.secret,
       "user": {
-        "id": faker.guid.guid(),
+        "id": 12345678,
         "name": faker.person.name(),
         "email": faker.internet.safeEmail(),
       }
