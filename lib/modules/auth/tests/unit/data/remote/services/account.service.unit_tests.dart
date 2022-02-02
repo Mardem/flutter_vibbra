@@ -1,0 +1,82 @@
+import 'package:flutter_test/flutter_test.dart';
+import 'package:vibbra_notifications/core/di/components/remote/http_client.dart';
+import 'package:vibbra_notifications/core/di/components/remote/response.dart';
+import 'package:vibbra_notifications/core/di/inject.dart';
+import 'package:vibbra_notifications/modules/auth/src/data/remote/mappers/login.mapper.dart';
+import 'package:vibbra_notifications/modules/auth/src/data/remote/services/account.service.dart';
+import 'package:vibbra_notifications/modules/auth/tests/fixtures/data/remote/services/account.service.fixture.dart';
+import 'package:vibbra_notifications/modules/auth/tests/mocks/data/remote/http/http_client_account.fake.dart';
+
+void main() async {
+  group('Test valid Http Login', () {
+    late AccountService service;
+
+    setUpAll(() {
+      inject.registerFactory<HttpClient>(
+        () => MockHttpClientValidLoginResponse(),
+      );
+      service = AccountServiceImpl();
+    });
+
+    tearDownAll(() {
+      inject.unregister<HttpClient>();
+    });
+
+    test(
+        'Given_UserAccessData_When_TheUserAccessWithCredentials_Then_LoginIsSuccessfully',
+        () async {
+      // Given
+      String email = AccountServiceFixture.email;
+      String password = AccountServiceFixture.password;
+
+      // When
+      HttpResponse<LoginMapper?> res = await service.login(
+        email: email,
+        password: password,
+      );
+
+      // Then
+      expect(res, isA<HttpResponse<LoginMapper?>>());
+      expect(res.data, isA<LoginMapper>());
+      expect(res.isSuccess, isTrue);
+      expect(res.message, equals(AccountServiceMessages.success));
+      expect(res.statusCode, equals(HttpStatus.success));
+    });
+  });
+
+  group('Test Invalid Http Login', () {
+    late AccountService service;
+
+    setUpAll(() {
+      inject.registerFactory<HttpClient>(
+        () => MockHttpClientInvalidLoginResponse(),
+      );
+      service = AccountServiceImpl();
+    });
+
+    tearDownAll(() {
+      inject.unregister<HttpClient>();
+    });
+
+    test(
+        'Given_UserAccessData_When_TheUserAccessWithCredentials_Then_ReturnError',
+        () async {
+      // Given
+      String email = AccountServiceFixture.email;
+      String password = AccountServiceFixture.password;
+
+      // When
+      HttpResponse<LoginMapper?> res = await service.login(
+        email: email,
+        password: password,
+      );
+
+      // Then
+      expect(res, isA<HttpResponse<LoginMapper?>>());
+      expect(res.data, isNull);
+      expect(res.isSuccess, isFalse);
+      expect(res.message, equals(AccountServiceMessages.error));
+      expect(res.statusCode, equals(HttpStatus.serverError));
+    });
+  });
+}

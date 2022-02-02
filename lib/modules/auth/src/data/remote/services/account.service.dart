@@ -24,7 +24,7 @@ class AccountServiceImpl implements AccountService {
         'password': password,
       });
 
-      LoginMapper mapper = loginMapperFromJson(res.data);
+      LoginMapper mapper = LoginMapper.fromJson(res.data);
 
       response
         ..isSuccess = true

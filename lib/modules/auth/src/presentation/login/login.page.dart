@@ -15,6 +15,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> with LoginWidgets {
+  final GlobalKey<FormState> _key = GlobalKey<FormState>();
+
   @override
   void didChangeDependencies() {
     vm.error.listen((event) {
@@ -70,7 +72,7 @@ class _LoginPageState extends State<LoginPage> with LoginWidgets {
                     Expanded(
                       child: Column(
                         children: [
-                          apiLogin(),
+                          apiLogin(_key),
                           socialLogin(),
                         ],
                       ),

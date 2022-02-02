@@ -10,51 +10,79 @@ import 'login.viewmodel.dart';
 class LoginWidgets {
   final vm = inject<LoginViewModel>();
 
-  apiLogin() {
+  apiLogin(GlobalKey<FormState> key) {
     return Expanded(
       child: Padding(
         padding: EdgeInsets.all(16.sp),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            StreamBuilder<String>(
-              stream: vm.email,
-              builder: (context, snapshot) {
-                return TextFormField(
-                  decoration: LoginWidgets.inputDecoration(
-                    hint: 'E-mail',
-                  ),
-                  initialValue: snapshot.data,
-                  onChanged: (String value) => vm.setEmail(value),
-                );
-              },
-            ),
-            SizedBox(height: 20.w),
-            StreamBuilder<String>(
-              stream: vm.password,
-              builder: (context, snapshot) {
-                return TextFormField(
-                  obscureText: true,
-                  decoration: inputDecoration(
-                    hint: 'Senha',
-                  ),
-                  initialValue: snapshot.data,
-                  onChanged: (String value) => vm.setPassword(value),
-                );
-              },
-            ),
-            SizedBox(height: 20.w),
-            StreamBuilder<bool>(
-              stream: vm.loading,
-              initialData: false,
-              builder: (context, AsyncSnapshot<bool> snapshot) {
-                if (snapshot.hasData && snapshot.data == true) {
+        child: Form(
+          key: key,
+          onChanged: () => key.currentState?.validate(),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              StreamBuilder<String>(
+                stream: vm.email,
+                builder: (context, snapshot) {
+                  return TextFormField(
+                    decoration: LoginWidgets.inputDecoration(
+                      hint: 'E-mail',
+                    ),
+                    initialValue: snapshot.data,
+                    onChanged: (String value) => vm.setEmail(value),
+                    validator: (String? value) {
+                      if (value!.isEmpty) {
+                        return 'Não deixe esse campo vazio!';
+                      }
+                    },
+                  );
+                },
+              ),
+              SizedBox(height: 20.w),
+              StreamBuilder<String>(
+                stream: vm.password,
+                builder: (context, snapshot) {
+                  return TextFormField(
+                    obscureText: true,
+                    decoration: inputDecoration(
+                      hint: 'Senha',
+                    ),
+                    initialValue: snapshot.data,
+                    onChanged: (String value) => vm.setPassword(value),
+                    validator: (String? value) {
+                      if (value!.isEmpty) {
+                        return 'Não deixe esse campo vazio!';
+                      }
+                    },
+                  );
+                },
+              ),
+              SizedBox(height: 20.w),
+              StreamBuilder<bool>(
+                stream: vm.loading,
+                initialData: false,
+                builder: (context, AsyncSnapshot<bool> snapshot) {
+                  if (snapshot.hasData && snapshot.data == true) {
+                    return AppButton(
+                      child: const SizedBox(
+                        width: 15,
+                        height: 15,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          color: Colors.white,
+                        ),
+                      ),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 30.w,
+                      ),
+                      backgroundColor: DefaultColors.defaultBlue,
+                      elevation: 0,
+                    );
+                  }
+
                   return AppButton(
-                    child: const SizedBox(
-                      width: 15,
-                      height: 15,
-                      child: CircularProgressIndicator(
-                        strokeWidth: 2,
+                    child: const Text(
+                      'Acessar',
+                      style: TextStyle(
                         color: Colors.white,
                       ),
                     ),
@@ -63,26 +91,16 @@ class LoginWidgets {
                     ),
                     backgroundColor: DefaultColors.defaultBlue,
                     elevation: 0,
+                    onPressed: () async {
+                      if (key.currentState!.validate()) {
+                        await vm.login();
+                      }
+                    },
                   );
-                }
-
-                return AppButton(
-                  child: const Text(
-                    'Acessar',
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 30.w,
-                  ),
-                  backgroundColor: DefaultColors.defaultBlue,
-                  elevation: 0,
-                  onPressed: () async => vm.login(),
-                );
-              },
-            )
-          ],
+                },
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -142,6 +160,14 @@ class LoginWidgets {
           color: Colors.transparent,
           width: 0,
         ),
+        borderRadius: BorderRadius.circular(30),
+      ),
+      errorBorder: UnderlineInputBorder(
+        borderSide: const BorderSide(color: Colors.transparent),
+        borderRadius: BorderRadius.circular(30),
+      ),
+      focusedErrorBorder: UnderlineInputBorder(
+        borderSide: const BorderSide(color: Colors.transparent),
         borderRadius: BorderRadius.circular(30),
       ),
       enabledBorder: UnderlineInputBorder(
