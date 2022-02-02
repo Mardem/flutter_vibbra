@@ -1,0 +1,46 @@
+import 'package:dio/dio.dart';
+import 'package:vibbra_notifications/core/di/components/remote/http_client.dart';
+import 'package:vibbra_notifications/core/di/components/remote/response.dart';
+import 'package:vibbra_notifications/core/di/inject.dart';
+import 'package:vibbra_notifications/modules/auth/src/data/remote/mappers/login.mapper.dart';
+import 'package:vibbra_notifications/modules/auth/src/data/urls/urls.dart';
+
+abstract class AccountService {
+  Future<HttpResponse<LoginMapper?>> login({required email, required password});
+}
+
+class AccountServiceImpl implements AccountService {
+  final _client = inject<HttpClient>();
+
+  @override
+  Future<HttpResponse<LoginMapper?>> login({
+    required email,
+    required password,
+  }) async {
+    HttpResponse<LoginMapper> response = HttpResponse();
+    try {
+      Response res = await _client.post(AccountUrls.login, body: {
+        'login': email,
+        'password': password,
+      });
+
+      LoginMapper mapper = LoginMapper.fromJson(res.data);
+
+      response
+        ..isSuccess = true
+        ..data = mapper
+        ..message = AccountServiceMessages.success
+        ..statusCode = HttpStatus.success;
+    } catch (e) {
+      response
+        ..isSuccess = false
+        ..message = AccountServiceMessages.error;
+    }
+    return response;
+  }
+}
+
+class AccountServiceMessages {
+  static String error = 'Houve um problema ao realizar o login!';
+  static String success = 'Autenticado com sucesso!';
+}
