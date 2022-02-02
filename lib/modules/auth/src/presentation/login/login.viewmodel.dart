@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:vibbra_notifications/core/base/viewmodel.base.dart';
 import 'package:vibbra_notifications/core/di/components/remote/response.dart';
@@ -7,6 +8,7 @@ import 'package:vibbra_notifications/modules/auth/src/data/remote/mappers/login.
 import 'package:vibbra_notifications/modules/auth/src/data/remote/services/google.service.dart';
 import 'package:vibbra_notifications/modules/auth/src/domain/interactor/account.interactor.dart';
 import 'package:vibbra_notifications/modules/auth/src/domain/interactor/social.interactor.dart';
+import 'package:vibbra_notifications/modules/home/routes.dart';
 
 class LoginViewModel extends BaseViewModel {
   final _socialInteractor = inject<SocialLoginInteractor>();
@@ -35,7 +37,7 @@ class LoginViewModel extends BaseViewModel {
     }
   }
 
-  login() async {
+  login(context) async {
     setLoading(true);
 
     HttpResponse<LoginMapper?> res = await _accountInteractor.login(
@@ -45,6 +47,8 @@ class LoginViewModel extends BaseViewModel {
 
     if (res.isSuccess) {
       setSuccess('Bem vindo, ${res.data!.user!.name}!');
+
+      Navigator.pushNamed(context, routeHome.name);
     } else {
       setError(res.message);
     }

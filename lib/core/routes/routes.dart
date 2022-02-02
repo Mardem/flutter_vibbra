@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vibbra_notifications/core/views/page_not_found.page.dart';
 import 'package:vibbra_notifications/modules/auth/routes.dart';
+import 'package:vibbra_notifications/modules/home/routes.dart';
 
 import 'anim/nav_no_animation.dart';
 import 'anim/nav_slide_from_bottom.dart';
@@ -11,6 +12,7 @@ import 'anim/nav_slide_from_top.dart';
 /// Set new routes below
 final List<AppRoute> routes = [
   ...routeAuthModule,
+  ...routesHomeModule,
 ];
 
 enum NavigationType { fromBottom, fromTop, fromRight, fromLeft, noAnimation }
@@ -20,10 +22,11 @@ class AppRoute {
   final NavigationType? direction;
   Widget? page = Container();
 
-  AppRoute(
-      {this.name = "/",
-      this.direction = NavigationType.noAnimation,
-      this.page});
+  AppRoute({
+    this.name = "/",
+    this.direction = NavigationType.noAnimation,
+    this.page,
+  });
 }
 
 class RouteGenerator {
