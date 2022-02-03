@@ -28,7 +28,7 @@ class LoginViewModel extends BaseViewModel {
   Stream<bool> get logged => _keepLogged.stream;
   void setLogged(bool value) => _keepLogged.add(value);
 
-  googleLogin() async {
+  googleLogin(context) async {
     _socialInteractor.setProvider(
       inject<GoogleAuthService>(),
     );
@@ -36,6 +36,10 @@ class LoginViewModel extends BaseViewModel {
 
     if (res.success) {
       setSuccess('Bem vindo, ${res.name}!');
+
+      _homeVM.setName(res.name);
+
+      Navigator.pushNamed(context, routeHome.name);
     }
   }
 

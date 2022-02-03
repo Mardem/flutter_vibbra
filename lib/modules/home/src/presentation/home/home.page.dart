@@ -25,6 +25,7 @@ class _HomePageState extends State<HomePage> {
       rightLogo: true,
       child: SizedBox(
         width: ScreenUtil().screenWidth,
+        height: ScreenUtil().screenHeight,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
@@ -42,46 +43,48 @@ class _HomePageState extends State<HomePage> {
                   );
                 },
               ),
-              Container(
-                margin: EdgeInsets.only(top: 30.w),
-                height: 400.w,
-                child: GridView.count(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 20,
-                  mainAxisSpacing: 20,
-                  children: [
-                    GestureDetector(
-                      child: _container(
-                        icon: LineIcons.mobilePhone,
-                        title: 'Configuração\nde\nSMS',
+              Expanded(
+                child: Container(
+                  margin: EdgeInsets.only(top: 30.w),
+                  height: 400.w,
+                  child: GridView.count(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 20,
+                    mainAxisSpacing: 20,
+                    children: [
+                      GestureDetector(
+                        child: _container(
+                          icon: LineIcons.mobilePhone,
+                          title: 'Configuração\nde\nSMS',
+                        ),
+                        onTap: () {
+                          Navigator.pushNamed(context, routeSmsConfig.name);
+                        },
                       ),
-                      onTap: () {
-                        Navigator.pushNamed(context, routeSmsConfig.name);
-                      },
-                    ),
-                    _container(
-                      icon: LineIcons.envelope,
-                      title: 'Configuração\nde\nE-mail',
-                    ),
-                    GestureDetector(
-                      child: _container(
-                        icon: LineIcons.home,
-                        title: 'Tela inicial',
+                      _container(
+                        icon: LineIcons.envelope,
+                        title: 'Configuração\nde\nE-mail',
                       ),
-                      onTap: () {
-                        Navigator.pushNamed(context, routeLogin.name);
-                      },
-                    ),
-                    GestureDetector(
-                      child: _container(
-                        icon: LineIcons.timesCircleAlt,
-                        title: 'Sair',
+                      GestureDetector(
+                        child: _container(
+                          icon: LineIcons.home,
+                          title: 'Tela inicial',
+                        ),
+                        onTap: () {
+                          Navigator.pushNamed(context, routeLogin.name);
+                        },
                       ),
-                      onTap: () {
-                        Navigator.pushNamed(context, routeLogin.name);
-                      },
-                    ),
-                  ],
+                      GestureDetector(
+                        child: _container(
+                          icon: LineIcons.timesCircleAlt,
+                          title: 'Sair',
+                        ),
+                        onTap: () {
+                          Navigator.pushNamed(context, routeLogin.name);
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               )
             ],
