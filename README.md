@@ -69,6 +69,12 @@ Linux, macOS e Windows:
 git clone https://git.vibbra.com.br/marden/mobile-notifications.git && (cd mobile-notifications && flutter pub get)
 ```
 
+O arquivo APK do aplicativo se encontra em:
+```
+./src/app/app-debug.apk
+```
+*O projeto foi criado utilizando o emulador do MacOS, ou seja, já está apto a rodar tanto em Android quanto iOS.*
+
 
 
 
