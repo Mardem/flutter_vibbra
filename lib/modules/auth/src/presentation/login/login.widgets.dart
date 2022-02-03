@@ -160,7 +160,7 @@ class LoginWidgets {
   static InputDecoration inputDecoration({required String hint}) {
     return InputDecoration(
       border: InputBorder.none,
-      hintText: hint,
+      hintText: ' ' + hint,
       hintStyle: const TextStyle(fontSize: 13),
       filled: true,
       fillColor: Colors.grey.withOpacity(.2),

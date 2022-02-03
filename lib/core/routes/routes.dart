@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vibbra_notifications/core/views/page_not_found.page.dart';
 import 'package:vibbra_notifications/modules/auth/routes.dart';
 import 'package:vibbra_notifications/modules/home/routes.dart';
+import 'package:vibbra_notifications/modules/sms/routes.dart';
 
 import 'anim/nav_no_animation.dart';
 import 'anim/nav_slide_from_bottom.dart';
@@ -13,6 +14,7 @@ import 'anim/nav_slide_from_top.dart';
 final List<AppRoute> routes = [
   ...routeAuthModule,
   ...routesHomeModule,
+  ...routesSmsModule,
 ];
 
 enum NavigationType { fromBottom, fromTop, fromRight, fromLeft, noAnimation }

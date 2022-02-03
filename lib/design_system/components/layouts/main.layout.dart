@@ -8,12 +8,14 @@ class MainLayout extends StatelessWidget {
   final Widget child;
   final bool topLogo;
   final bool rightLogo;
+  final bool activeBack;
 
   const MainLayout({
     Key? key,
     required this.child,
     this.topLogo = false,
     this.rightLogo = false,
+    this.activeBack = false,
   }) : super(key: key);
 
   @override
@@ -26,6 +28,19 @@ class MainLayout extends StatelessWidget {
               Container(height: ScreenUtil().screenHeight),
               const ShapeTopStack(),
               const ShapeBottomStack(),
+              activeBack
+                  ? Positioned(
+                      left: 0,
+                      top: 20.w,
+                      child: IconButton(
+                        icon: const Icon(
+                          Icons.arrow_back,
+                          color: Colors.white,
+                        ),
+                        onPressed: () => Navigator.pop(context),
+                      ),
+                    )
+                  : Container(),
               rightLogo ? _rightLogo() : Container(),
               Positioned(
                 width: ScreenUtil().screenWidth,
