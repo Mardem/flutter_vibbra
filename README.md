@@ -12,7 +12,7 @@ Case utilizado no teste [Vibbra!](https://www.vibbra.com.br/) para se tornar um 
 - Ferramenta de configuração de SMS
 -  Layout personalizado
 
-## 🚀 Imagens do Flipper Wallet
+## 🚀 Imagens do Vibbra! Notifications
 
 <table>
   <tr>
