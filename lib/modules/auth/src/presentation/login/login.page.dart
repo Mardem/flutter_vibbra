@@ -53,7 +53,7 @@ class _LoginPageState extends State<LoginPage> with LoginWidgets {
         body: SingleChildScrollView(
           child: Stack(
             children: [
-              Container(height: ScreenUtil().screenHeight),
+              Container(height: ScreenUtil().screenHeight + 10),
               const ShapeTopStack(),
               const ShapeBottomStack(),
               Positioned(
