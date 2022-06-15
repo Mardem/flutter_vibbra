@@ -45,7 +45,7 @@ O projeto foi desenvolvido seguindo alguns padrões de projetos, princípios e t
 ![KISS (Princípio)](https://img.shields.io/badge/Design%20Pattern-Builder-00599C)
 
 **Tecnologias e ferramentas**
-- Providers (Gerenciamento de estados)
+- RXDart (Gerenciamento de estados)
 - Screen Util (Responsividade)
 - [Conventional Commits](https://www.conventionalcommits.org/)
 - Illustrator
